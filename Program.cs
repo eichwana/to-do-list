@@ -23,9 +23,10 @@ namespace ConsoleApp1
             Console.WriteLine("2. " + e2);
             Console.WriteLine("3. " + e3);
             string filepath = "C:\\codetest\\";
+            System.IO.Directory.CreateDirectory(filepath);
             string[] entries = { e1, e2, e3 };
             System.IO.File.WriteAllLines(filepath + nametext + ".txt", entries);
-            Console.WriteLine("See "+filepath + nametext + ".txt");
+            Console.WriteLine("See " + filepath + nametext + ".txt");
 
             Console.ReadLine(); // Keeps the console open by waiting for enter
 
