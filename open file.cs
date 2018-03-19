@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 
 namespace open_file
 {
@@ -25,14 +26,14 @@ namespace open_file
                 Console.WriteLine("Please type your " + num + " entries, pressing enter after each one");
 
                 for (int n = 1; n <= num2; n++)
-                    {
-                        string t = Console.ReadLine();
-                        string e = n + ". " + t;
-                        entries2.Add(e);
-                    }
+                {
+                    string t = Console.ReadLine();
+                    string e = n + ". " + t;
+                    entries2.Add(e);
+                }
 
-                System.IO.Directory.CreateDirectory(filepath);
-                System.IO.File.WriteAllLines(filepath + name + ".txt", entries2);
+                Directory.CreateDirectory(filepath);
+                File.WriteAllLines(filepath + name + ".txt", entries2);
                 Console.WriteLine("See " + filepath + name + ".txt");
             }
 
@@ -40,20 +41,21 @@ namespace open_file
             {
                 Console.WriteLine("\nWhat is your filename?");
                 string efile = Console.ReadLine();
-                string[] entries = System.IO.File.ReadAllLines(filepath + efile + ".txt");
-
-                // PLACEHOLDER TEXT
-                // if efile doens't exist
-                // display errortext
-
-
-                Console.WriteLine("\nContents of " + efile + "\n");
-                foreach (string entry in entries)
-                {                
-                    Console.WriteLine(entry);
+                string efile2 = filepath + efile + ".txt";
+                if (File.Exists(efile2))
+                {
+                    string[] entries = File.ReadAllLines(efile2);
+                    Console.WriteLine("\nContents of " + efile + "\n");
+                    foreach (string entry in entries)
+                    {
+                        Console.WriteLine(entry);
+                    }
+                }
+                else
+                {
+                    Console.WriteLine(errortext);
                 }
             }
-
             else
             {
                 Console.WriteLine(errortext);
