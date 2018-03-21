@@ -22,20 +22,27 @@ namespace open_file
                 String name = Console.ReadLine();
                 Console.WriteLine("Hello " + name + ", how many entries do you have?");
                 string num = Console.ReadLine();
-                int num2 = Convert.ToInt16(num);
-                Console.WriteLine("Please type your " + num + " entries, pressing enter after each one");
-
-                for (int n = 1; n <= num2; n++)
+                if (int.TryParse(num, out int num2))
                 {
-                    string t = Console.ReadLine();
-                    string e = n + ". " + t;
-                    entries2.Add(e);
-                }
+                    Console.WriteLine("Please type your " + num + " entries, pressing enter after each one");
 
-                Directory.CreateDirectory(filepath);
-                File.WriteAllLines(filepath + name + ".txt", entries2);
-                Console.WriteLine("See " + filepath + name + ".txt");
+                    for (int n = 1; n <= num2; n++)
+                    {
+                        string e = Console.ReadLine();
+                        entries2.Add(e);
+                    }
+
+                    Directory.CreateDirectory(filepath);
+                    File.WriteAllLines(filepath + name + ".txt", entries2);
+                    Console.WriteLine("See " + filepath + name + ".txt");
+                }
+                else
+                {
+                    Console.WriteLine(errortext);
+                }
             }
+               
+                
 
             else if (filee.Trim() == "y" | filee.Trim() == "Y" | filee.Trim() == "yes" | filee.Trim() == "1" | filee.Trim() == "Yes")
             {
@@ -46,9 +53,12 @@ namespace open_file
                 {
                     string[] entries = File.ReadAllLines(efile2);
                     Console.WriteLine("\nContents of " + efile + "\n");
+                    int n = 1;
                     foreach (string entry in entries)
                     {
-                        Console.WriteLine(entry);
+                        Console.WriteLine(n + ". "  + entry);
+                        n++;
+                        
                     }
                 }
                 else
